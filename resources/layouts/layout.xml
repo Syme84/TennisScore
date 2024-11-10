@@ -1,18 +1,19 @@
 <layout id="MainLayout">
-
+    
     <!-- Names of the players -->
-    <label id="lblPlayer1Name" x="50" y="30" text="P1" />
+    <label id="lblPlayer1Name" x="40" y="30" text="P1" />
     <label id="lblPlayer2Name" x="180" y="30" text="P2" />
 
     <!-- Score of sets -->
-    <label id="lblSetsPlayer1" x="50" y="70" text="0" />
-    <label id="lblSetsPlayer2" x="180" y="70" text="0" />
+    <label id="lblSetsPlayer1" x="40" y="70" />
+    <label id="lblSetsPlayer2" x="180" y="70" />
 
     <!-- Score of games of the current set -->
-    <label id="lblGamesPlayer1" x="50" y="110" text="0" />
-    <label id="lblGamesPlayer2" x="180" y="110" text="0" />
+    <label id="lblGamesPlayer1" x="40" y="110" />
+    <label id="lblGamesPlayer2" x="180" y="110" />
 
     <!-- Score of current game -->
-    <label id="lblPointsPlayer1" x="50" y="150" text="0" />
-    <label id="lblPointsPlayer2" x="180" y="150" text="0" />
+    <label id="lblPointsPlayer1" x="40" y="150" />
+    <label id="lblPointsPlayer2" x="180" y="150" />
+
 </layout>

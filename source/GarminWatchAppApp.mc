@@ -4,8 +4,12 @@ import Toybox.WatchUi;
 
 class GarminWatchAppApp extends Application.AppBase {
 
+    var tennisMatchModel;
+
     function initialize() {
         AppBase.initialize();
+
+        tennisMatchModel = new TennisMatchModel();
     }
 
     // onStart() is called on application start up
@@ -20,7 +24,9 @@ class GarminWatchAppApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        return [ new GarminWatchAppView(), new GarminWatchAppDelegate() ];
+        var view = new GarminWatchAppView(tennisMatchModel);
+        var delegate = new GarminWatchAppDelegate(tennisMatchModel);
+        return [ view, delegate ];
     }
 
 }

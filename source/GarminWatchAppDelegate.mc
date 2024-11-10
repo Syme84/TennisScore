@@ -4,12 +4,11 @@ import Toybox.System;
 
 class GarminWatchAppDelegate extends WatchUi.BehaviorDelegate {
     
-    private var scorePlayer1 = 0;
-    private var scorePlayer2 = 0;
+    var tennisMatchModel;
 
-
-    function initialize() {
+    function initialize(model as TennisMatchModel) {
         BehaviorDelegate.initialize();
+        tennisMatchModel = model;
     }
 
     function onMenu() as Boolean {
@@ -22,13 +21,18 @@ class GarminWatchAppDelegate extends WatchUi.BehaviorDelegate {
         switch(keyEvent.getKey())
         {
             case KEY_UP:
+                tennisMatchModel.increaseSetsPlayer1();
                 System.println("Up Taste gedrueckt");
+                System.println(tennisMatchModel.setsPlayer1.toString());
                 break;
             case KEY_DOWN:
+                tennisMatchModel.increaseSetsPlayer2();
                 System.println("Down Taste gedrueckt");
+                System.println(tennisMatchModel.setsPlayer2.toString());
                 break;
         }
 
+        WatchUi.requestUpdate();
         return true;
     }
 

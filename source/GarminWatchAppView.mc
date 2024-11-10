@@ -2,9 +2,20 @@ import Toybox.Graphics;
 import Toybox.WatchUi;
 
 class GarminWatchAppView extends WatchUi.View {
+ 
+    var tennisMatchModel;
 
-    function initialize() {
+    var lblSetsPlayer1;
+    var lblSetsPlayer2;
+    var lblGamesPlayer1;
+    var lblGamesPlayer2;
+    var lblPointsPlayer1;
+    var lblPointsPlayer2;
+
+
+    function initialize(model as TennisMatchModel) {
         View.initialize();
+        tennisMatchModel = model;
     }
 
     // Load your resources here
@@ -20,6 +31,20 @@ class GarminWatchAppView extends WatchUi.View {
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
+        lblSetsPlayer1 = self.findDrawableById("lblSetsPlayer1") as Text;
+        lblSetsPlayer2 = self.findDrawableById("lblSetsPlayer2") as Text;
+        lblGamesPlayer1 = self.findDrawableById("lblGamesPlayer1") as Text;
+        lblGamesPlayer2 = self.findDrawableById("lblGamesPlayer2") as Text;
+        lblPointsPlayer1 = self.findDrawableById("lblPointsPlayer1") as Text;
+        lblPointsPlayer2 = self.findDrawableById("lblPointsPlayer2") as Text;
+
+        lblSetsPlayer1.setText(tennisMatchModel.setsPlayer1.toString());
+        lblSetsPlayer2.setText(tennisMatchModel.setsPlayer2.toString());
+        lblGamesPlayer1.setText(tennisMatchModel.gamesPlayer1.toString());
+        lblGamesPlayer2.setText(tennisMatchModel.gamesPlayer2.toString());
+        lblPointsPlayer1.setText(tennisMatchModel.pointsPlayer1.toString());
+        lblPointsPlayer2.setText(tennisMatchModel.pointsPlayer2.toString());
+
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
     }
