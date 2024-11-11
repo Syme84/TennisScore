@@ -21,14 +21,10 @@ class GarminWatchAppDelegate extends WatchUi.BehaviorDelegate {
         switch(keyEvent.getKey())
         {
             case KEY_UP:
-                tennisMatchModel.increaseSetsPlayer1();
-                System.println("Up Taste gedrueckt");
-                System.println(tennisMatchModel.setsPlayer1.toString());
+                tennisMatchModel.increasePointsPlayer1();
                 break;
             case KEY_DOWN:
-                tennisMatchModel.increaseSetsPlayer2();
-                System.println("Down Taste gedrueckt");
-                System.println(tennisMatchModel.setsPlayer2.toString());
+                tennisMatchModel.increasePointsPlayer2();
                 break;
         }
 
