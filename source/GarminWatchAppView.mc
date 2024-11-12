@@ -42,8 +42,12 @@ class GarminWatchAppView extends WatchUi.View {
         lblSetsPlayer2.setText(tennisMatchModel.setsPlayer2.toString());
         lblGamesPlayer1.setText(tennisMatchModel.gamesPlayer1.toString());
         lblGamesPlayer2.setText(tennisMatchModel.gamesPlayer2.toString());
-        lblPointsPlayer1.setText(tennisMatchModel.pointsPlayer1.toString());
-        lblPointsPlayer2.setText(tennisMatchModel.pointsPlayer2.toString());
+
+        // Shows AD instead of -1 when some player has advantage
+        // Shows "AD" instead of -1 when a player has advantage
+        lblPointsPlayer1.setText(tennisMatchModel.pointsPlayer1 == -1 ? "AD" : tennisMatchModel.pointsPlayer1.toString());
+        lblPointsPlayer2.setText(tennisMatchModel.pointsPlayer2 == -1 ? "AD" : tennisMatchModel.pointsPlayer2.toString());
+
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
