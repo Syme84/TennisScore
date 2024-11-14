@@ -6,8 +6,15 @@ class TennisMatchModel {
     var pointsPlayer1 = 0;
     var pointsPlayer2 = 0;
 
+    var pointsTiebreakPlayer1 = 0;
+    var pointsTiebreakPlayer2 = 0;
+
     // Methods for player1
     function increaseSetsPlayer1() as Void {
+        pointsPlayer1 = 0;
+        pointsPlayer2 = 0;
+        gamesPlayer1 = 0;
+        gamesPlayer2 = 0;
         setsPlayer1++;
     }
 
@@ -18,6 +25,8 @@ class TennisMatchModel {
             case 2:
             case 3:
             case 4:
+                pointsPlayer1 = 0;
+                pointsPlayer2 = 0;
                 gamesPlayer1++;
                 break;
             case 5:
@@ -27,25 +36,29 @@ class TennisMatchModel {
                 }
                 else 
                 {
+                    pointsPlayer1 = 0;
+                    pointsPlayer2 = 0;
                     gamesPlayer1++;
                 }
                 break;
             case 6:
                 if (gamesPlayer2 <= 5)
                 {
-                    gamesPlayer1 = 0;
-                    gamesPlayer2 = 0;
                     increaseSetsPlayer1();
-                }
-                else
-                {
-                    // Tiebreak
                 }
                 break;
         }
     }
 
     function increasePointsPlayer1() as Void {
+
+        // Special case -> 6:6 -> Tiebreak
+        if (gamesPlayer1 == 6 && gamesPlayer2 == 6)
+        {
+            increasePointsTiebreakPlayer1();
+            return;
+        }
+
         switch(pointsPlayer1){
             case 0:
                 pointsPlayer1 = 15;
@@ -71,23 +84,36 @@ class TennisMatchModel {
                 // Win player1 because player2 has less than 40 points
                 else
                 {
-                    pointsPlayer1 = 0;
-                    pointsPlayer2 = 0;
                     increaseGamesPlayer1();
                 }
                 break;
             case -1:
                 // Advantage player1 -> wins the game
-                pointsPlayer1 = 0;
-                pointsPlayer2 = 0;
                 increaseGamesPlayer1();
                 break;
         }
     }
 
+    function increasePointsTiebreakPlayer1(){
+       var differencePoints = pointsTiebreakPlayer1 - pointsTiebreakPlayer2;
+       if (pointsTiebreakPlayer1 <= 5)
+       {
+           pointsTiebreakPlayer1++;
+       }
+       else if (pointsTiebreakPlayer1 >= 6 && differencePoints >= 1)
+       {
+           pointsTiebreakPlayer1 = 0;
+           pointsTiebreakPlayer2 = 0;
+           increaseSetsPlayer1();
+       }
+    }
 
     // Methods for player2
     function increaseSetsPlayer2() as Void {
+        pointsPlayer1 = 0;
+        pointsPlayer2 = 0;
+        gamesPlayer1 = 0;
+        gamesPlayer2 = 0;
         setsPlayer2 ++;
     }
 
@@ -98,6 +124,8 @@ class TennisMatchModel {
             case 2:
             case 3:
             case 4:
+                pointsPlayer1 = 0;
+                pointsPlayer2 = 0;
                 gamesPlayer2++;
                 break;
             case 5:
@@ -107,6 +135,8 @@ class TennisMatchModel {
                 }
                 else 
                 {
+                    pointsPlayer1 = 0;
+                    pointsPlayer2 = 0;
                     gamesPlayer2++;
                 }
                 break;
@@ -115,15 +145,19 @@ class TennisMatchModel {
                 {
                     increaseSetsPlayer2();
                 }
-                else
-                {
-                    // Tiebreak
-                }
                 break;
         }
     }
 
     function increasePointsPlayer2() as Void {
+
+        // Special case -> 6:6 -> Tiebreak
+        if (gamesPlayer1 == 6 && gamesPlayer2 == 6)
+        {
+            increasePointsTiebreakPlayer2();
+            return;
+        }  
+
         switch(pointsPlayer2){
             case 0:
                 pointsPlayer2 = 15;
@@ -149,17 +183,27 @@ class TennisMatchModel {
                 // Win player2 because player1 has less than 40 points
                 else
                 {
-                    pointsPlayer1 = 0;
-                    pointsPlayer2 = 0;
                     increaseGamesPlayer2();
                 }
                 break;
             case -1:
                 // Advantage player2 -> wins the game
-                pointsPlayer1 = 0;
-                pointsPlayer2 = 0;
                 increaseGamesPlayer2();
                 break;
         }
+    }
+
+    function increasePointsTiebreakPlayer2(){
+       var differencePoints = pointsTiebreakPlayer2 - pointsTiebreakPlayer1;
+       if (pointsTiebreakPlayer2 <= 5)
+       {
+           pointsTiebreakPlayer2++;
+       }
+       else if (pointsTiebreakPlayer2 >= 6 && differencePoints >= 1)
+       {
+           pointsTiebreakPlayer1 = 0;
+           pointsTiebreakPlayer2 = 0;
+           increaseSetsPlayer2();
+       }
     }
 }
