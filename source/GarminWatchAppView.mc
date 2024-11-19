@@ -2,7 +2,6 @@ import Toybox.Graphics;
 import Toybox.WatchUi;
 
 class GarminWatchAppView extends WatchUi.View {
- 
     var tennisMatchModel;
 
     var lblSetsPlayer1;
@@ -12,6 +11,11 @@ class GarminWatchAppView extends WatchUi.View {
     var lblPointsPlayer1;
     var lblPointsPlayer2;
 
+    // Defines the colors
+    var customGreen = 0x00713d;
+    var customPurple = 0x4f2684;
+    var white = 0xffffff;
+
 
     function initialize(model as TennisMatchModel) {
         View.initialize();
@@ -19,7 +23,7 @@ class GarminWatchAppView extends WatchUi.View {
     }
 
     // Load your resources here
-    function onLayout(dc as Dc) as Void {
+    function onLayout(dc) as Void {
         setLayout(Rez.Layouts.MainLayout(dc));
     }
 
@@ -31,26 +35,61 @@ class GarminWatchAppView extends WatchUi.View {
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
-        lblSetsPlayer1 = self.findDrawableById("lblSetsPlayer1") as Text;
-        lblSetsPlayer2 = self.findDrawableById("lblSetsPlayer2") as Text;
-        lblGamesPlayer1 = self.findDrawableById("lblGamesPlayer1") as Text;
-        lblGamesPlayer2 = self.findDrawableById("lblGamesPlayer2") as Text;
-        lblPointsPlayer1 = self.findDrawableById("lblPointsPlayer1") as Text;
-        lblPointsPlayer2 = self.findDrawableById("lblPointsPlayer2") as Text;
-
-        lblSetsPlayer1.setText(tennisMatchModel.setsPlayer1.toString());
-        lblSetsPlayer2.setText(tennisMatchModel.setsPlayer2.toString());
-        lblGamesPlayer1.setText(tennisMatchModel.gamesPlayer1.toString());
-        lblGamesPlayer2.setText(tennisMatchModel.gamesPlayer2.toString());
-
-        // Shows AD instead of -1 when some player has advantage
-        // Shows "AD" instead of -1 when a player has advantage
-        lblPointsPlayer1.setText(tennisMatchModel.pointsPlayer1 == -1 ? "AD" : tennisMatchModel.pointsPlayer1.toString());
-        lblPointsPlayer2.setText(tennisMatchModel.pointsPlayer2 == -1 ? "AD" : tennisMatchModel.pointsPlayer2.toString());
-
-
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
+
+        drawTable(dc);
+    }
+
+    function drawTable(dc) as Void {
+        // Get screen dimensions
+        var screenWidth = dc.getWidth();
+        var screenHeight = dc.getHeight();
+
+        // Clear screen with background color
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+        dc.clear();
+
+       // Table configuration
+       var cellWidth = (screenWidth - 40) / 4;  
+       var cellHeight = cellWidth;  
+       var tableX = 20;   
+       var tableY = (screenHeight / 2) - cellHeight; 
+       var tableDimensionsModel = new TableDimensionsModel(tableX, tableY, cellWidth, cellHeight); 
+
+       // Draws the table with the score in every cell
+       drawCellOfTable(dc, tableDimensionsModel, 0, 0, white, "P1", customPurple);
+       drawCellOfTable(dc, tableDimensionsModel, 0, 1, white, "P2", customPurple);
+       drawCellOfTable(dc, tableDimensionsModel, 1, 0, customGreen, tennisMatchModel.setsPlayer1.toString(), white);
+       drawCellOfTable(dc, tableDimensionsModel, 1, 1, customGreen, tennisMatchModel.setsPlayer2.toString(), white);
+       drawCellOfTable(dc, tableDimensionsModel, 2, 0, customPurple, tennisMatchModel.gamesPlayer1.toString(), white);
+       drawCellOfTable(dc, tableDimensionsModel, 2, 1, customPurple, tennisMatchModel.gamesPlayer2.toString(), white);
+
+       // Shows AD instead of -1 when some player has advantage
+       // Shows "AD" instead of -1 when a player has advantage
+       var textInCell;
+       if (tennisMatchModel.pointsPlayer1 == -1) {
+          textInCell = "AD";
+       }
+       else {
+          textInCell = tennisMatchModel.pointsPlayer1.toString(); 
+       }
+       drawCellOfTable(dc, tableDimensionsModel, 3, 0, white, textInCell, customPurple);
+       drawCellOfTable(dc, tableDimensionsModel, 3, 1, white, tennisMatchModel.pointsPlayer2.toString(), customPurple);
+    }
+
+    function drawCellOfTable(dc, tableDimensions, columnNumber, rowNumber, color, textInCell, textColor) as Void{
+       // Draw the background color of the cell
+       var x = tableDimensions.x + columnNumber * tableDimensions.cellWidth;
+       var y = tableDimensions.y + rowNumber * tableDimensions.cellHeight;
+       dc.setColor(color, color);
+       dc.fillRectangle(x, y, tableDimensions.cellWidth, tableDimensions.cellHeight);
+
+       // Draws the current score of the cell
+       dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
+       var fontHeight = dc.getFontHeight(Graphics.FONT_LARGE); 
+       var textY = y + (tableDimensions.cellHeight / 2) - (fontHeight / 2);
+       dc.drawText(x+tableDimensions.cellWidth/2, textY, Graphics.FONT_LARGE, textInCell, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     // Called when this View is removed from the screen. Save the
