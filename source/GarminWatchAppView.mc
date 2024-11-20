@@ -66,16 +66,10 @@ class GarminWatchAppView extends WatchUi.View {
        drawCellOfTable(dc, tableDimensionsModel, 2, 1, customPurple, tennisMatchModel.gamesPlayer2.toString(), white);
 
        // Shows AD instead of -1 when some player has advantage
-       // Shows "AD" instead of -1 when a player has advantage
-       var textInCell;
-       if (tennisMatchModel.pointsPlayer1 == -1) {
-          textInCell = "AD";
-       }
-       else {
-          textInCell = tennisMatchModel.pointsPlayer1.toString(); 
-       }
-       drawCellOfTable(dc, tableDimensionsModel, 3, 0, white, textInCell, customPurple);
-       drawCellOfTable(dc, tableDimensionsModel, 3, 1, white, tennisMatchModel.pointsPlayer2.toString(), customPurple);
+       var player1Player2Text = adjustStringForAdvantageCase(tennisMatchModel.pointsPlayer1, tennisMatchModel.pointsPlayer2);
+
+       drawCellOfTable(dc, tableDimensionsModel, 3, 0, white, player1Player2Text[0], customPurple);
+       drawCellOfTable(dc, tableDimensionsModel, 3, 1, white, player1Player2Text[1], customPurple);
     }
 
     function drawCellOfTable(dc, tableDimensions, columnNumber, rowNumber, color, textInCell, textColor) as Void{
@@ -90,6 +84,23 @@ class GarminWatchAppView extends WatchUi.View {
        var fontHeight = dc.getFontHeight(Graphics.FONT_LARGE); 
        var textY = y + (tableDimensions.cellHeight / 2) - (fontHeight / 2);
        dc.drawText(x+tableDimensions.cellWidth/2, textY, Graphics.FONT_LARGE, textInCell, Graphics.TEXT_JUSTIFY_CENTER);
+    }
+
+    function adjustStringForAdvantageCase(pointsPlayer1, pointsPlayer2){
+        // Player1 has advantage
+        if (pointsPlayer1 == -1)
+        {
+            return ["AD", ""];
+        }
+
+        // Player2 has advantage
+        if (pointsPlayer2 == -1)
+        {
+            return ["", "AD"];
+        }
+
+        // When neither of the two players has advantage 
+        return [pointsPlayer1.toString(), pointsPlayer2.toString()];
     }
 
     // Called when this View is removed from the screen. Save the
