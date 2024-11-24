@@ -1,5 +1,8 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
+import Toybox.Time;
+import Toybox.Time.Gregorian;
+import Toybox.ActivityMonitor;
 
 class GarminWatchAppView extends WatchUi.View {
     var tennisMatchModel;
@@ -17,10 +20,26 @@ class GarminWatchAppView extends WatchUi.View {
     var white = 0xffffff;
     var backgroundColor = 0xc4c4c4;
 
+    // Defines the bitmaps
+    var tennisBallBitmap;
+
 
     function initialize(model as TennisMatchModel) {
         View.initialize();
         tennisMatchModel = model;
+        tennisBallBitmap = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.TennisBallIcon,
+            :locX=>75,
+            :locY=>185
+        });
+
+        // Create timer that updates the gui every second
+        var timer = new Timer.Timer();
+        timer.start(method(:timerCallBack), 1000, true);
+    }
+
+    function timerCallBack() as Void {
+        WatchUi.requestUpdate();
     }
 
     // Load your resources here
@@ -38,11 +57,48 @@ class GarminWatchAppView extends WatchUi.View {
     function onUpdate(dc as Dc) as Void {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
-
+ 
         drawBackground(dc);
         drawTable(dc);
+
+        drawTimeDisplay(dc);
+        drawHeartRate(dc);
     }
 
+    function drawTimeDisplay(dc)
+    {
+        var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
+        var timeString = Lang.format(
+        "$1$:$2$:$3$",
+        [
+        today.hour,
+        today.min,
+        today.sec
+        ]
+        );
+
+        dc.setColor(white, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(120, 20, Graphics.FONT_MEDIUM, timeString, Graphics.TEXT_JUSTIFY_CENTER);
+    }
+
+    function drawHeartRate(dc)
+    {
+        var heartRate = null;
+        if (ActivityMonitor has :getHeartRateHistory){
+            heartRate = Activity.getActivityInfo().currentHeartRate;
+        }
+        
+        if (heartRate == null)
+        {
+            heartRate = "---";
+        }
+  
+        // draws the tennis ball icon
+        tennisBallBitmap.draw(dc);
+
+        dc.setColor(white, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(145, 185, Graphics.FONT_MEDIUM, heartRate, Graphics.TEXT_JUSTIFY_CENTER);
+    }
 
     function drawBackground(dc) {
         dc.setColor(Graphics.COLOR_WHITE, backgroundColor);
@@ -62,8 +118,8 @@ class GarminWatchAppView extends WatchUi.View {
        var tableDimensionsModel = new TableDimensionsModel(tableX, tableY, cellWidth, cellHeight); 
 
        // Draws the table with the score in every cell
-       drawPlayerNameCell(dc, tableDimensionsModel, 0, white, "P1", customPurple, true);
-       drawPlayerNameCell(dc, tableDimensionsModel, 1, white, "P2", customPurple, false);
+       drawPlayerNameCell(dc, tableDimensionsModel, 0, white, "P1", customPurple, tennisMatchModel.hasPlayer1Serve);
+       drawPlayerNameCell(dc, tableDimensionsModel, 1, white, "P2", customPurple, !tennisMatchModel.hasPlayer1Serve);
        drawCellOfTable(dc, tableDimensionsModel, 1, 0, customGreen, tennisMatchModel.setsPlayer1.toString(), white);
        drawCellOfTable(dc, tableDimensionsModel, 1, 1, customGreen, tennisMatchModel.setsPlayer2.toString(), white);
        drawCellOfTable(dc, tableDimensionsModel, 2, 0, customPurple, tennisMatchModel.gamesPlayer1.toString(), white);

@@ -9,6 +9,8 @@ class TennisMatchModel {
     var pointsTiebreakPlayer1 = 0;
     var pointsTiebreakPlayer2 = 0;
 
+    var hasPlayer1Serve = true;
+
     // Methods for player1
     function increaseSetsPlayer1() as Void {
         pointsPlayer1 = 0;
@@ -16,6 +18,7 @@ class TennisMatchModel {
         gamesPlayer1 = 0;
         gamesPlayer2 = 0;
         setsPlayer1++;
+        hasPlayer1Serve = !hasPlayer1Serve;
     }
 
     function increaseGamesPlayer1() as Void {
@@ -28,6 +31,7 @@ class TennisMatchModel {
                 pointsPlayer1 = 0;
                 pointsPlayer2 = 0;
                 gamesPlayer1++;
+                hasPlayer1Serve = !hasPlayer1Serve;
                 break;
             case 5:
                 if (gamesPlayer2 <= 4)
@@ -39,6 +43,7 @@ class TennisMatchModel {
                     pointsPlayer1 = 0;
                     pointsPlayer2 = 0;
                     gamesPlayer1++;
+                    hasPlayer1Serve = !hasPlayer1Serve;
                 }
                 break;
             case 6:
@@ -115,6 +120,7 @@ class TennisMatchModel {
         gamesPlayer1 = 0;
         gamesPlayer2 = 0;
         setsPlayer2 ++;
+        hasPlayer1Serve = !hasPlayer1Serve;
     }
 
     function increaseGamesPlayer2() as Void {
@@ -127,6 +133,7 @@ class TennisMatchModel {
                 pointsPlayer1 = 0;
                 pointsPlayer2 = 0;
                 gamesPlayer2++;
+                hasPlayer1Serve = !hasPlayer1Serve;
                 break;
             case 5:
                 if (gamesPlayer1 <= 4)
@@ -138,6 +145,7 @@ class TennisMatchModel {
                     pointsPlayer1 = 0;
                     pointsPlayer2 = 0;
                     gamesPlayer2++;
+                    hasPlayer1Serve = !hasPlayer1Serve;
                 }
                 break;
             case 6:
