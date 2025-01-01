@@ -11,6 +11,52 @@ class TennisMatchModel {
 
     var hasPlayer1Serve = true;
 
+    var previousScoreStack = [];
+
+    // Restore the old score
+    function restorePreviousScore() {
+        if (previousScoreStack.size() > 0) {
+            var previousScore = previousScoreStack[previousScoreStack.size() - 1];
+            previousScoreStack.remove(previousScore);
+
+            setsPlayer1 = previousScore[:setsPlayer1];
+            setsPlayer2 = previousScore[:setsPlayer2];
+            gamesPlayer1 = previousScore[:gamesPlayer1];
+            gamesPlayer2 = previousScore[:gamesPlayer2];
+            pointsPlayer1 = previousScore[:pointsPlayer1];
+            pointsPlayer2 = previousScore[:pointsPlayer2];
+            pointsTiebreakPlayer1 = previousScore[:pointsTiebreakPlayer1];
+            pointsTiebreakPlayer2 = previousScore[:pointsTiebreakPlayer2];
+            hasPlayer1Serve = previousScore[:hasPlayer1Serve];
+        } 
+        else {
+            setsPlayer1 = 0;
+            setsPlayer2 = 0;
+            gamesPlayer1 = 0;
+            gamesPlayer2 = 0;
+            pointsPlayer1 = 0;
+            pointsPlayer2 = 0;
+            pointsTiebreakPlayer1 = 0;
+            pointsTiebreakPlayer2 = 0;
+            hasPlayer1Serve = true;
+        }
+    }
+
+    function saveCurrentScore(){
+        var currentScore = {
+            :setsPlayer1 => setsPlayer1,
+            :setsPlayer2 => setsPlayer2,
+            :gamesPlayer1 => gamesPlayer1,
+            :gamesPlayer2 => gamesPlayer2,
+            :pointsPlayer1 => pointsPlayer1,
+            :pointsPlayer2 => pointsPlayer2,
+            :pointsTiebreakPlayer1 => pointsTiebreakPlayer1,
+            :pointsTiebreakPlayer2 => pointsTiebreakPlayer2,
+            :hasPlayer1Serve => hasPlayer1Serve
+        };
+        previousScoreStack.add(currentScore);
+    }
+
     // Methods for player1
     function increaseSetsPlayer1() as Void {
         pointsPlayer1 = 0;
@@ -56,6 +102,9 @@ class TennisMatchModel {
     }
 
     function increasePointsPlayer1() as Void {
+
+        // Adds the current score to the stack to restore the score if necessary
+        saveCurrentScore();
 
         // Special case -> 6:6 -> Tiebreak
         if (gamesPlayer1 == 6 && gamesPlayer2 == 6)
@@ -158,6 +207,9 @@ class TennisMatchModel {
     }
 
     function increasePointsPlayer2() as Void {
+
+        // Adds the current score to the stack to restore the score if necessary
+        saveCurrentScore();
 
         // Special case -> 6:6 -> Tiebreak
         if (gamesPlayer1 == 6 && gamesPlayer2 == 6)
