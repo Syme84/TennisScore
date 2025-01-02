@@ -1,2 +1,4 @@
 bin/
 .vscode/
+source/GarminWatchApp.prg
+source/GarminWatchApp.prg.debug.xml
