@@ -151,6 +151,12 @@ class TennisMatchModel {
     function increasePointsTiebreakPlayer1(){
        var differencePoints = pointsTiebreakPlayer1 - pointsTiebreakPlayer2;
        pointsTiebreakPlayer1++;
+
+       // Switch server after the first point and every two points
+       var totalTiebreakPoints = pointsTiebreakPlayer1 + pointsTiebreakPlayer2;
+       if (totalTiebreakPoints == 1 || (totalTiebreakPoints > 1 && totalTiebreakPoints % 2 == 1)) {
+        hasPlayer1Serve = !hasPlayer1Serve;
+       }
        
        if (pointsTiebreakPlayer1 > 6 && differencePoints >= 1)
        {
@@ -255,6 +261,12 @@ class TennisMatchModel {
        var differencePoints = pointsTiebreakPlayer2 - pointsTiebreakPlayer1;
        pointsTiebreakPlayer2++;
        
+       // Switch server after the first point and every two points
+       var totalTiebreakPoints = pointsTiebreakPlayer1 + pointsTiebreakPlayer2;
+       if (totalTiebreakPoints == 1 || (totalTiebreakPoints > 1 && totalTiebreakPoints % 2 == 1)) {
+        hasPlayer1Serve = !hasPlayer1Serve;
+       }
+
        if (pointsTiebreakPlayer2 > 6 && differencePoints >= 1)
        {
            pointsTiebreakPlayer1 = 0;
