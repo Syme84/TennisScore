@@ -32,7 +32,7 @@
 
 We welcome any feedback, bug reports, or suggestions for improving the **TennisScore** app. Your input helps make the app better for everyone!
 
-- **Bug Reports**: If you encounter any bugs or issues while using the app, please report them by opening an issue in the [GitHub Issues](https://github.com/YOURUSERNAME/TennisScore/issues) section of this repository. Provide as much detail as possible, including steps to reproduce the issue if applicable.
+- **Bug Reports**: If you encounter any bugs or issues while using the app, please report them by opening an issue in the [GitHub Issues](https://github.com/syme84/TennisScore/issues) section of this repository. Provide as much detail as possible, including steps to reproduce the issue if applicable.
   
 - **Suggestions**: If you have any suggestions for new features or improvements, feel free to share them! Open an issue or create a pull request with your ideas.
 
