@@ -3,11 +3,8 @@
 **TennisScore** is an app designed for Garmin watches that allows users to track the score of a tennis match directly from their wrist. It provides an easy way to monitor the game without needing to rely on external devices or paper scorecards.
 
 <p align="center">
-<img src="ReadMeResources/exampleImage.png" width="200" alt="">
+<img src="ReadMeResources/demo.gif">
 </p>
-
-## Demo GIF
-![App Demo](ReadMeResources/demo.gif)
 
 ## Features
 
