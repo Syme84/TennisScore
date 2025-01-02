@@ -1,0 +1,939 @@
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 1; ]
+import Toybox.Graphics;
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 2; ]
+import Toybox.WatchUi;
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 3; ]
+import Toybox.Time;
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 4; ]
+import Toybox.Time.Gregorian;
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 5; ]
+import Toybox.ActivityMonitor;
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 7; ]
+class GarminWatchAppView extends WatchUi.View{
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 7; ]
+    <init> {
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 7; ]
+    static
+    <init> {
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 8; @position = 8; ]
+    var tennisMatchModel;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 10; @position = 8; ]
+    var lblSetsPlayer1;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 11; @position = 8; ]
+    var lblSetsPlayer2;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 12; @position = 8; ]
+    var lblGamesPlayer1;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 13; @position = 8; ]
+    var lblGamesPlayer2;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 14; @position = 8; ]
+    var lblPointsPlayer1;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 15; @position = 8; ]
+    var lblPointsPlayer2;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 18; @position = 8; ]
+    var customGreen = 0x00713d;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 19; @position = 8; ]
+    var customPurple = 0x4f2684;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 20; @position = 8; ]
+    var white = 0xffffff;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 21; @position = 8; ]
+    var backgroundColor = 0xc4c4c4;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 24; @position = 8; ]
+    var tennisBallBitmap;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 27; ]
+    function initialize(model as TennisMatchModel) as Void {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_27_51_39_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 28 8 ]
+        %tmp.2 = getv ? :View;
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 29 8 ]
+        %tmp.5 = lgetv %model;
+        putv self :tennisMatchModel %tmp.5;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 30 8 ]
+        %tmp.8 = getm $.Toybox.WatchUi;
+        %tmp.9 = getv function ? %tmp.8 :Bitmap;
+        %tmp.10 = newd 3;
+        %tmp.12 = const :rezId;
+        %tmp.14 = getv ? :Rez;
+        %tmp.15 = getv %tmp.14 :Drawables;
+        %tmp.16 = getv %tmp.15 :TennisBallIcon;
+        %tmp.17 = dup %tmp.10;
+        %tmp.18 = aputv %tmp.17 %tmp.12 %tmp.16;
+        %tmp.20 = const :locX;
+        %tmp.21 = 75;
+        %tmp.22 = dup %tmp.18;
+        %tmp.23 = aputv %tmp.22 %tmp.20 %tmp.21;
+        %tmp.25 = const :locY;
+        %tmp.26 = 185;
+        %tmp.27 = dup %tmp.23;
+        %tmp.28 = aputv %tmp.27 %tmp.25 %tmp.26;
+        %tmp.6 = newc %tmp.9 (%tmp.28);
+        putv self :tennisBallBitmap %tmp.6;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 37 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_27_51_39_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_27_51_39_4_stop" ]
+        %timer.1 = local;
+        %tmp.32 = getv ? :Timer;
+        %tmp.33 = getv function ? %tmp.32 :Timer;
+        %tmp.29 = newc %tmp.33 ();
+        lputv %timer.1 %tmp.29;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 38 8 ]
+        %tmp.34 = lgetv %timer.1;
+        %tmp.35 = getv function %tmp.34 :start;
+        %tmp.36 = self;
+        %tmp.37 = getv function %tmp.36 :method;
+        %tmp.39 = const :timerCallBack;
+        %tmp.40 = invoke %tmp.36 %tmp.37(%tmp.39);
+        %tmp.41 = 1000;
+        %tmp.42 = true;
+        invoke %tmp.34 %tmp.35(%tmp.40, %tmp.41, %tmp.42);
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_27_51_39_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 41; ]
+    function timerCallBack() as Void {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_41_37_43_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 42 8 ]
+        %tmp.1 = getm $.Toybox.WatchUi;
+        %tmp.2 = getv function %tmp.1 :requestUpdate;
+        invoke %tmp.1 %tmp.2();
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_41_37_43_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 46; ]
+    function onLayout(dc) as Void {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_46_34_48_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 47 8 ]
+        %tmp.1 = self;
+        %tmp.2 = getv function %tmp.1 :setLayout;
+        %tmp.4 = getv ? :Rez;
+        %tmp.5 = getv %tmp.4 :Layouts;
+        %tmp.6 = getv function %tmp.5 :MainLayout;
+        %tmp.8 = lgetv %dc;
+        %tmp.9 = invoke %tmp.5 %tmp.6(%tmp.8);
+        invoke %tmp.1 %tmp.2(%tmp.9);
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_46_34_48_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 53; ]
+    function onShow() as Void {
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 57; ]
+    function onUpdate(dc as Dc) as Void {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_57_40_66_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 59 8 ]
+        %tmp.2 = getv ? :View;
+        %tmp.3 = getv function %tmp.2 :onUpdate;
+        %tmp.5 = lgetv %dc;
+        invoke %tmp.2 %tmp.3(%tmp.5);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 61 8 ]
+        %tmp.6 = self;
+        %tmp.7 = getv function %tmp.6 :drawBackground;
+        %tmp.9 = lgetv %dc;
+        invoke %tmp.6 %tmp.7(%tmp.9);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 62 8 ]
+        %tmp.10 = self;
+        %tmp.11 = getv function %tmp.10 :drawTable;
+        %tmp.13 = lgetv %dc;
+        invoke %tmp.10 %tmp.11(%tmp.13);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 64 8 ]
+        %tmp.14 = self;
+        %tmp.15 = getv function %tmp.14 :drawTimeDisplay;
+        %tmp.17 = lgetv %dc;
+        invoke %tmp.14 %tmp.15(%tmp.17);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 65 8 ]
+        %tmp.18 = self;
+        %tmp.19 = getv function %tmp.18 :drawHeartRate;
+        %tmp.21 = lgetv %dc;
+        invoke %tmp.18 %tmp.19(%tmp.21);
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_57_40_66_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 68; ]
+    function drawTimeDisplay(dc) {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_69_4_82_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 70 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_69_4_82_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_69_4_82_4_stop" ]
+        %today.1 = local;
+        %tmp.1 = getm $.Toybox.Time.Gregorian;
+        %tmp.2 = getv function %tmp.1 :info;
+        %tmp.3 = getm $.Toybox.Time;
+        %tmp.4 = getv function %tmp.3 :now;
+        %tmp.5 = invoke %tmp.3 %tmp.4();
+        %tmp.6 = getm $.Toybox.Time;
+        %tmp.7 = getv %tmp.6 :FORMAT_MEDIUM;
+        %tmp.8 = invoke %tmp.1 %tmp.2(%tmp.5, %tmp.7);
+        lputv %today.1 %tmp.8;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 71 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_69_4_82_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_69_4_82_4_stop" ]
+        %timeString.2 = local;
+        %tmp.10 = getv ? :Lang;
+        %tmp.11 = getv function %tmp.10 :format;
+        %tmp.12 = "$1$:$2$:$3$";
+        %tmp.13 = newa 3;
+        %tmp.14 = lgetv %today.1;
+        %tmp.15 = getv %tmp.14 :hour;
+        %tmp.16 = dup %tmp.13;
+        %tmp.17 = aputv %tmp.16 0 %tmp.15;
+        %tmp.18 = lgetv %today.1;
+        %tmp.19 = getv %tmp.18 :min;
+        %tmp.20 = dup %tmp.17;
+        %tmp.21 = aputv %tmp.20 1 %tmp.19;
+        %tmp.22 = lgetv %today.1;
+        %tmp.23 = getv %tmp.22 :sec;
+        %tmp.24 = dup %tmp.21;
+        %tmp.25 = aputv %tmp.24 2 %tmp.23;
+        %tmp.26 = invoke %tmp.10 %tmp.11(%tmp.12, %tmp.25);
+        lputv %timeString.2 %tmp.26;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 80 8 ]
+        %tmp.27 = lgetv %dc;
+        %tmp.28 = getv function %tmp.27 :setColor;
+        %tmp.30 = getv ? :white;
+        %tmp.31 = getm $.Toybox.Graphics;
+        %tmp.32 = getv %tmp.31 :COLOR_TRANSPARENT;
+        invoke %tmp.27 %tmp.28(%tmp.30, %tmp.32);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 81 8 ]
+        %tmp.33 = lgetv %dc;
+        %tmp.34 = getv function %tmp.33 :drawText;
+        %tmp.35 = 120;
+        %tmp.36 = 20;
+        %tmp.37 = getm $.Toybox.Graphics;
+        %tmp.38 = getv %tmp.37 :FONT_MEDIUM;
+        %tmp.40 = lgetv %timeString.2;
+        %tmp.41 = getm $.Toybox.Graphics;
+        %tmp.42 = getv %tmp.41 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.33 %tmp.34(%tmp.35, %tmp.36, %tmp.38, %tmp.40, %tmp.42);
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_69_4_82_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 84; ]
+    function drawHeartRate(dc) {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_85_4_101_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 86 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_85_4_101_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_85_4_101_4_stop" ]
+        %heartRate.1 = local;
+        %tmp.1 = null;
+        lputv %heartRate.1 %tmp.1;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 87 8 ]
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_87_8_89_8_if_stmt:
+        %tmp.3 = getm $.Toybox.ActivityMonitor;
+        %tmp.5 = const :getHeartRateHistory;
+        %tmp.6 = canhazplz %tmp.3 %tmp.5;
+        bf %tmp.6 @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_87_8_89_8_if_end;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_87_8_89_8_if_true:
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_87_53_89_8_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 88 12 ]
+        %tmp.8 = getv ? :Activity;
+        %tmp.9 = getv function %tmp.8 :getActivityInfo;
+        %tmp.10 = invoke %tmp.8 %tmp.9();
+        %tmp.11 = getv %tmp.10 :currentHeartRate;
+        lputv %heartRate.1 %tmp.11;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_87_53_89_8_stop:
+        goto @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_87_8_89_8_if_end;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_87_8_89_8_if_end:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 91 8 ]
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_91_8_94_8_if_stmt:
+        %tmp.13 = lgetv %heartRate.1;
+        %tmp.14 = null;
+        %tmp.15 = eq %tmp.13 %tmp.14;
+        bf %tmp.15 @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_91_8_94_8_if_end;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_91_8_94_8_if_true:
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_92_8_94_8_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 93 12 ]
+        %tmp.16 = "---";
+        lputv %heartRate.1 %tmp.16;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_92_8_94_8_stop:
+        goto @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_91_8_94_8_if_end;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_91_8_94_8_if_end:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 97 8 ]
+        %tmp.18 = getv ? :tennisBallBitmap;
+        %tmp.19 = getv function %tmp.18 :draw;
+        %tmp.21 = lgetv %dc;
+        invoke %tmp.18 %tmp.19(%tmp.21);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 99 8 ]
+        %tmp.22 = lgetv %dc;
+        %tmp.23 = getv function %tmp.22 :setColor;
+        %tmp.25 = getv ? :white;
+        %tmp.26 = getm $.Toybox.Graphics;
+        %tmp.27 = getv %tmp.26 :COLOR_TRANSPARENT;
+        invoke %tmp.22 %tmp.23(%tmp.25, %tmp.27);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 100 8 ]
+        %tmp.28 = lgetv %dc;
+        %tmp.29 = getv function %tmp.28 :drawText;
+        %tmp.30 = 145;
+        %tmp.31 = 185;
+        %tmp.32 = getm $.Toybox.Graphics;
+        %tmp.33 = getv %tmp.32 :FONT_MEDIUM;
+        %tmp.35 = lgetv %heartRate.1;
+        %tmp.36 = getm $.Toybox.Graphics;
+        %tmp.37 = getv %tmp.36 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.28 %tmp.29(%tmp.30, %tmp.31, %tmp.33, %tmp.35, %tmp.37);
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_85_4_101_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 103; ]
+    function drawBackground(dc) {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_103_32_106_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 104 8 ]
+        %tmp.1 = lgetv %dc;
+        %tmp.2 = getv function %tmp.1 :setColor;
+        %tmp.3 = getm $.Toybox.Graphics;
+        %tmp.4 = getv %tmp.3 :COLOR_WHITE;
+        %tmp.6 = getv ? :backgroundColor;
+        invoke %tmp.1 %tmp.2(%tmp.4, %tmp.6);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 105 8 ]
+        %tmp.7 = lgetv %dc;
+        %tmp.8 = getv function %tmp.7 :clear;
+        invoke %tmp.7 %tmp.8();
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_103_32_106_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 108; ]
+    function drawTable(dc) as Void {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 110 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_stop" ]
+        %screenWidth.1 = local;
+        %tmp.1 = lgetv %dc;
+        %tmp.2 = getv function %tmp.1 :getWidth;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %screenWidth.1 %tmp.3;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 111 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_stop" ]
+        %screenHeight.2 = local;
+        %tmp.4 = lgetv %dc;
+        %tmp.5 = getv function %tmp.4 :getHeight;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        lputv %screenHeight.2 %tmp.6;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 114 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_stop" ]
+        %cellWidth.3 = local;
+        %tmp.8 = lgetv %screenWidth.1;
+        %tmp.9 = 40;
+        %tmp.10 = sub %tmp.8 %tmp.9;
+        %tmp.11 = 4;
+        %tmp.12 = div %tmp.10 %tmp.11;
+        lputv %cellWidth.3 %tmp.12;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 115 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_stop" ]
+        %cellHeight.4 = local;
+        %tmp.14 = lgetv %cellWidth.3;
+        lputv %cellHeight.4 %tmp.14;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 116 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_stop" ]
+        %tableX.5 = local;
+        %tmp.15 = 20;
+        lputv %tableX.5 %tmp.15;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 117 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_stop" ]
+        %tableY.6 = local;
+        %tmp.17 = lgetv %screenHeight.2;
+        %tmp.18 = 2;
+        %tmp.19 = div %tmp.17 %tmp.18;
+        %tmp.21 = lgetv %cellHeight.4;
+        %tmp.22 = sub %tmp.19 %tmp.21;
+        lputv %tableY.6 %tmp.22;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 118 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_stop" ]
+        %tableDimensionsModel.7 = local;
+        %tmp.26 = getv ? :TableDimensionsModel;
+        %tmp.28 = lgetv %tableX.5;
+        %tmp.30 = lgetv %tableY.6;
+        %tmp.32 = lgetv %cellWidth.3;
+        %tmp.34 = lgetv %cellHeight.4;
+        %tmp.23 = newc %tmp.26 (%tmp.28, %tmp.30, %tmp.32, %tmp.34);
+        lputv %tableDimensionsModel.7 %tmp.23;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 121 7 ]
+        %tmp.35 = self;
+        %tmp.36 = getv function %tmp.35 :drawPlayerNameCell;
+        %tmp.38 = lgetv %dc;
+        %tmp.40 = lgetv %tableDimensionsModel.7;
+        %tmp.41 = 0;
+        %tmp.43 = getv ? :white;
+        %tmp.44 = "P1";
+        %tmp.46 = getv ? :customPurple;
+        %tmp.48 = getv ? :tennisMatchModel;
+        %tmp.49 = getv %tmp.48 :hasPlayer1Serve;
+        invoke %tmp.35 %tmp.36(%tmp.38, %tmp.40, %tmp.41, %tmp.43, %tmp.44, %tmp.46, %tmp.49);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 122 7 ]
+        %tmp.50 = self;
+        %tmp.51 = getv function %tmp.50 :drawPlayerNameCell;
+        %tmp.53 = lgetv %dc;
+        %tmp.55 = lgetv %tableDimensionsModel.7;
+        %tmp.56 = 1;
+        %tmp.58 = getv ? :white;
+        %tmp.59 = "P2";
+        %tmp.61 = getv ? :customPurple;
+        %tmp.63 = getv ? :tennisMatchModel;
+        %tmp.64 = getv %tmp.63 :hasPlayer1Serve;
+        %tmp.65 = not %tmp.64;
+        invoke %tmp.50 %tmp.51(%tmp.53, %tmp.55, %tmp.56, %tmp.58, %tmp.59, %tmp.61, %tmp.65);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 123 7 ]
+        %tmp.66 = self;
+        %tmp.67 = getv function %tmp.66 :drawCellOfTable;
+        %tmp.69 = lgetv %dc;
+        %tmp.71 = lgetv %tableDimensionsModel.7;
+        %tmp.72 = 1;
+        %tmp.73 = 0;
+        %tmp.75 = getv ? :customGreen;
+        %tmp.77 = getv ? :tennisMatchModel;
+        %tmp.78 = getv %tmp.77 :setsPlayer1;
+        %tmp.79 = getv function %tmp.78 :toString;
+        %tmp.80 = invoke %tmp.78 %tmp.79();
+        %tmp.82 = getv ? :white;
+        invoke %tmp.66 %tmp.67(%tmp.69, %tmp.71, %tmp.72, %tmp.73, %tmp.75, %tmp.80, %tmp.82);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 124 7 ]
+        %tmp.83 = self;
+        %tmp.84 = getv function %tmp.83 :drawCellOfTable;
+        %tmp.86 = lgetv %dc;
+        %tmp.88 = lgetv %tableDimensionsModel.7;
+        %tmp.89 = 1;
+        %tmp.90 = 1;
+        %tmp.92 = getv ? :customGreen;
+        %tmp.94 = getv ? :tennisMatchModel;
+        %tmp.95 = getv %tmp.94 :setsPlayer2;
+        %tmp.96 = getv function %tmp.95 :toString;
+        %tmp.97 = invoke %tmp.95 %tmp.96();
+        %tmp.99 = getv ? :white;
+        invoke %tmp.83 %tmp.84(%tmp.86, %tmp.88, %tmp.89, %tmp.90, %tmp.92, %tmp.97, %tmp.99);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 125 7 ]
+        %tmp.100 = self;
+        %tmp.101 = getv function %tmp.100 :drawCellOfTable;
+        %tmp.103 = lgetv %dc;
+        %tmp.105 = lgetv %tableDimensionsModel.7;
+        %tmp.106 = 2;
+        %tmp.107 = 0;
+        %tmp.109 = getv ? :customPurple;
+        %tmp.111 = getv ? :tennisMatchModel;
+        %tmp.112 = getv %tmp.111 :gamesPlayer1;
+        %tmp.113 = getv function %tmp.112 :toString;
+        %tmp.114 = invoke %tmp.112 %tmp.113();
+        %tmp.116 = getv ? :white;
+        invoke %tmp.100 %tmp.101(%tmp.103, %tmp.105, %tmp.106, %tmp.107, %tmp.109, %tmp.114, %tmp.116);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 126 7 ]
+        %tmp.117 = self;
+        %tmp.118 = getv function %tmp.117 :drawCellOfTable;
+        %tmp.120 = lgetv %dc;
+        %tmp.122 = lgetv %tableDimensionsModel.7;
+        %tmp.123 = 2;
+        %tmp.124 = 1;
+        %tmp.126 = getv ? :customPurple;
+        %tmp.128 = getv ? :tennisMatchModel;
+        %tmp.129 = getv %tmp.128 :gamesPlayer2;
+        %tmp.130 = getv function %tmp.129 :toString;
+        %tmp.131 = invoke %tmp.129 %tmp.130();
+        %tmp.133 = getv ? :white;
+        invoke %tmp.117 %tmp.118(%tmp.120, %tmp.122, %tmp.123, %tmp.124, %tmp.126, %tmp.131, %tmp.133);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 129 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_stop" ]
+        %player1Player2Text.8 = local;
+        %tmp.134 = self;
+        %tmp.135 = getv function %tmp.134 :adjustStringForAdvantageCase;
+        %tmp.137 = getv ? :tennisMatchModel;
+        %tmp.138 = getv %tmp.137 :pointsPlayer1;
+        %tmp.140 = getv ? :tennisMatchModel;
+        %tmp.141 = getv %tmp.140 :pointsPlayer2;
+        %tmp.142 = invoke %tmp.134 %tmp.135(%tmp.138, %tmp.141);
+        lputv %player1Player2Text.8 %tmp.142;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 130 7 ]
+        %tmp.143 = self;
+        %tmp.144 = getv function %tmp.143 :drawPointsCell;
+        %tmp.146 = lgetv %dc;
+        %tmp.148 = lgetv %tableDimensionsModel.7;
+        %tmp.149 = 0;
+        %tmp.151 = getv ? :white;
+        %tmp.153 = lgetv %player1Player2Text.8;
+        %tmp.154 = 0;
+        %tmp.155 = agetv %tmp.153 %tmp.154;
+        %tmp.157 = getv ? :customPurple;
+        invoke %tmp.143 %tmp.144(%tmp.146, %tmp.148, %tmp.149, %tmp.151, %tmp.155, %tmp.157);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 131 7 ]
+        %tmp.158 = self;
+        %tmp.159 = getv function %tmp.158 :drawPointsCell;
+        %tmp.161 = lgetv %dc;
+        %tmp.163 = lgetv %tableDimensionsModel.7;
+        %tmp.164 = 1;
+        %tmp.166 = getv ? :white;
+        %tmp.168 = lgetv %player1Player2Text.8;
+        %tmp.169 = 1;
+        %tmp.170 = agetv %tmp.168 %tmp.169;
+        %tmp.172 = getv ? :customPurple;
+        invoke %tmp.158 %tmp.159(%tmp.161, %tmp.163, %tmp.164, %tmp.166, %tmp.170, %tmp.172);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 134 7 ]
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_7_137_7_if_stmt:
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_11_134_98_begin:
+        %tmp.174 = getv ? :tennisMatchModel;
+        %tmp.175 = getv %tmp.174 :pointsTiebreakPlayer1;
+        %tmp.176 = 0;
+        %tmp.177 = gt %tmp.175 %tmp.176;
+        bt %tmp.177 @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_7_137_7_if_true;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_57_134_98_false:
+        %tmp.179 = getv ? :tennisMatchModel;
+        %tmp.180 = getv %tmp.179 :pointsTiebreakPlayer2;
+        %tmp.181 = 0;
+        %tmp.182 = gt %tmp.180 %tmp.181;
+        push %tmp.182;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_57_134_98_end:
+        %tmp.183 = phi [%tmp.177 @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_11_134_98_begin] [%tmp.182 @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_57_134_98_false] [%tmp.183 @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_57_134_98_end];
+        bf %tmp.183 @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_7_137_7_if_end;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_7_137_7_if_true:
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_100_137_7_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 135 11 ]
+        %tmp.184 = self;
+        %tmp.185 = getv function %tmp.184 :drawTiebreakScoreCell;
+        %tmp.187 = lgetv %dc;
+        %tmp.189 = lgetv %tableDimensionsModel.7;
+        %tmp.190 = 0;
+        %tmp.192 = getv ? :white;
+        %tmp.194 = getv ? :tennisMatchModel;
+        %tmp.195 = getv %tmp.194 :pointsTiebreakPlayer1;
+        %tmp.197 = getv ? :customPurple;
+        invoke %tmp.184 %tmp.185(%tmp.187, %tmp.189, %tmp.190, %tmp.192, %tmp.195, %tmp.197);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 136 11 ]
+        %tmp.198 = self;
+        %tmp.199 = getv function %tmp.198 :drawTiebreakScoreCell;
+        %tmp.201 = lgetv %dc;
+        %tmp.203 = lgetv %tableDimensionsModel.7;
+        %tmp.204 = 1;
+        %tmp.206 = getv ? :white;
+        %tmp.208 = getv ? :tennisMatchModel;
+        %tmp.209 = getv %tmp.208 :pointsTiebreakPlayer2;
+        %tmp.211 = getv ? :customPurple;
+        invoke %tmp.198 %tmp.199(%tmp.201, %tmp.203, %tmp.204, %tmp.206, %tmp.209, %tmp.211);
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_100_137_7_stop:
+        goto @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_7_137_7_if_end;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_134_7_137_7_if_end:
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_108_35_138_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 140; ]
+    function drawTiebreakScoreCell(dc, tableDimensions, rowNumber, color, textInCell, textColor) {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_140_96_151_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 142 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_140_96_151_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_140_96_151_4_stop" ]
+        %x.1 = local;
+        %tmp.1 = 170;
+        %tmp.2 = 20;
+        %tmp.3 = add %tmp.1 %tmp.2;
+        lputv %x.1 %tmp.3;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 143 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_140_96_151_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_140_96_151_4_stop" ]
+        %y.2 = local;
+        %tmp.4 = lgetv %tableDimensions;
+        %tmp.5 = getv %tmp.4 :y;
+        %tmp.7 = lgetv %rowNumber;
+        %tmp.8 = lgetv %tableDimensions;
+        %tmp.9 = getv %tmp.8 :cellHeight;
+        %tmp.10 = mul %tmp.7 %tmp.9;
+        %tmp.11 = add %tmp.5 %tmp.10;
+        %tmp.12 = 10;
+        %tmp.13 = add %tmp.11 %tmp.12;
+        lputv %y.2 %tmp.13;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 144 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_140_96_151_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_140_96_151_4_stop" ]
+        %cellWidth.3 = local;
+        %tmp.14 = lgetv %tableDimensions;
+        %tmp.15 = getv %tmp.14 :cellWidth;
+        %tmp.16 = 20;
+        %tmp.17 = add %tmp.15 %tmp.16;
+        lputv %cellWidth.3 %tmp.17;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 147 8 ]
+        %tmp.18 = lgetv %dc;
+        %tmp.19 = getv function %tmp.18 :setColor;
+        %tmp.21 = lgetv %textColor;
+        %tmp.22 = getm $.Toybox.Graphics;
+        %tmp.23 = getv %tmp.22 :COLOR_TRANSPARENT;
+        invoke %tmp.18 %tmp.19(%tmp.21, %tmp.23);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 148 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_140_96_151_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_140_96_151_4_stop" ]
+        %fontHeight.4 = local;
+        %tmp.24 = lgetv %dc;
+        %tmp.25 = getv function %tmp.24 :getFontHeight;
+        %tmp.26 = getm $.Toybox.Graphics;
+        %tmp.27 = getv %tmp.26 :FONT_SMALL;
+        %tmp.28 = invoke %tmp.24 %tmp.25(%tmp.27);
+        lputv %fontHeight.4 %tmp.28;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 149 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_140_96_151_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_140_96_151_4_stop" ]
+        %textY.5 = local;
+        %tmp.30 = lgetv %y.2;
+        %tmp.31 = lgetv %tableDimensions;
+        %tmp.32 = getv %tmp.31 :cellHeight;
+        %tmp.33 = 2;
+        %tmp.34 = div %tmp.32 %tmp.33;
+        %tmp.35 = add %tmp.30 %tmp.34;
+        %tmp.37 = lgetv %fontHeight.4;
+        %tmp.38 = 2;
+        %tmp.39 = div %tmp.37 %tmp.38;
+        %tmp.40 = sub %tmp.35 %tmp.39;
+        lputv %textY.5 %tmp.40;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 150 8 ]
+        %tmp.41 = lgetv %dc;
+        %tmp.42 = getv function %tmp.41 :drawText;
+        %tmp.44 = lgetv %x.1;
+        %tmp.46 = lgetv %cellWidth.3;
+        %tmp.47 = 2;
+        %tmp.48 = div %tmp.46 %tmp.47;
+        %tmp.49 = add %tmp.44 %tmp.48;
+        %tmp.51 = lgetv %textY.5;
+        %tmp.52 = getm $.Toybox.Graphics;
+        %tmp.53 = getv %tmp.52 :FONT_SMALL;
+        %tmp.55 = lgetv %textInCell;
+        %tmp.56 = getm $.Toybox.Graphics;
+        %tmp.57 = getv %tmp.56 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.41 %tmp.42(%tmp.49, %tmp.51, %tmp.53, %tmp.55, %tmp.57);
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_140_96_151_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 153; ]
+    function drawPlayerNameCell(dc, tableDimensions, rowNumber, color, textInCell, textColor, hasServ) {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_154_4_174_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 156 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_154_4_174_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_154_4_174_4_stop" ]
+        %x.1 = local;
+        %tmp.1 = 0;
+        lputv %x.1 %tmp.1;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 157 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_154_4_174_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_154_4_174_4_stop" ]
+        %y.2 = local;
+        %tmp.2 = lgetv %tableDimensions;
+        %tmp.3 = getv %tmp.2 :y;
+        %tmp.5 = lgetv %rowNumber;
+        %tmp.6 = lgetv %tableDimensions;
+        %tmp.7 = getv %tmp.6 :cellHeight;
+        %tmp.8 = mul %tmp.5 %tmp.7;
+        %tmp.9 = add %tmp.3 %tmp.8;
+        lputv %y.2 %tmp.9;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 158 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_154_4_174_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_154_4_174_4_stop" ]
+        %cellWidth.3 = local;
+        %tmp.10 = lgetv %tableDimensions;
+        %tmp.11 = getv %tmp.10 :cellWidth;
+        %tmp.12 = 20;
+        %tmp.13 = add %tmp.11 %tmp.12;
+        lputv %cellWidth.3 %tmp.13;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 159 7 ]
+        %tmp.14 = lgetv %dc;
+        %tmp.15 = getv function %tmp.14 :setColor;
+        %tmp.17 = lgetv %color;
+        %tmp.19 = lgetv %color;
+        invoke %tmp.14 %tmp.15(%tmp.17, %tmp.19);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 160 7 ]
+        %tmp.20 = lgetv %dc;
+        %tmp.21 = getv function %tmp.20 :fillRectangle;
+        %tmp.23 = lgetv %x.1;
+        %tmp.25 = lgetv %y.2;
+        %tmp.27 = lgetv %cellWidth.3;
+        %tmp.28 = lgetv %tableDimensions;
+        %tmp.29 = getv %tmp.28 :cellHeight;
+        invoke %tmp.20 %tmp.21(%tmp.23, %tmp.25, %tmp.27, %tmp.29);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 163 7 ]
+        %tmp.30 = lgetv %dc;
+        %tmp.31 = getv function %tmp.30 :setColor;
+        %tmp.33 = lgetv %textColor;
+        %tmp.34 = getm $.Toybox.Graphics;
+        %tmp.35 = getv %tmp.34 :COLOR_TRANSPARENT;
+        invoke %tmp.30 %tmp.31(%tmp.33, %tmp.35);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 164 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_154_4_174_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_154_4_174_4_stop" ]
+        %fontHeight.4 = local;
+        %tmp.36 = lgetv %dc;
+        %tmp.37 = getv function %tmp.36 :getFontHeight;
+        %tmp.38 = getm $.Toybox.Graphics;
+        %tmp.39 = getv %tmp.38 :FONT_LARGE;
+        %tmp.40 = invoke %tmp.36 %tmp.37(%tmp.39);
+        lputv %fontHeight.4 %tmp.40;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 165 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_154_4_174_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_154_4_174_4_stop" ]
+        %textY.5 = local;
+        %tmp.42 = lgetv %y.2;
+        %tmp.43 = lgetv %tableDimensions;
+        %tmp.44 = getv %tmp.43 :cellHeight;
+        %tmp.45 = 2;
+        %tmp.46 = div %tmp.44 %tmp.45;
+        %tmp.47 = add %tmp.42 %tmp.46;
+        %tmp.49 = lgetv %fontHeight.4;
+        %tmp.50 = 2;
+        %tmp.51 = div %tmp.49 %tmp.50;
+        %tmp.52 = sub %tmp.47 %tmp.51;
+        lputv %textY.5 %tmp.52;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 166 7 ]
+        %tmp.53 = lgetv %dc;
+        %tmp.54 = getv function %tmp.53 :drawText;
+        %tmp.56 = lgetv %cellWidth.3;
+        %tmp.57 = 2;
+        %tmp.58 = div %tmp.56 %tmp.57;
+        %tmp.60 = lgetv %textY.5;
+        %tmp.61 = getm $.Toybox.Graphics;
+        %tmp.62 = getv %tmp.61 :FONT_LARGE;
+        %tmp.64 = lgetv %textInCell;
+        %tmp.65 = getm $.Toybox.Graphics;
+        %tmp.66 = getv %tmp.65 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.53 %tmp.54(%tmp.58, %tmp.60, %tmp.62, %tmp.64, %tmp.66);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 168 7 ]
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_168_7_172_7_if_stmt:
+        %tmp.68 = lgetv %hasServ;
+        bf %tmp.68 @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_168_7_172_7_if_end;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_168_7_172_7_if_true:
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_169_7_172_7_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 170 10 ]
+        %tmp.69 = lgetv %dc;
+        %tmp.70 = getv function %tmp.69 :setColor;
+        %tmp.72 = getv ? :customGreen;
+        %tmp.73 = getm $.Toybox.Graphics;
+        %tmp.74 = getv %tmp.73 :COLOR_TRANSPARENT;
+        invoke %tmp.69 %tmp.70(%tmp.72, %tmp.74);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 171 10 ]
+        %tmp.75 = lgetv %dc;
+        %tmp.76 = getv function %tmp.75 :fillCircle;
+        %tmp.78 = lgetv %cellWidth.3;
+        %tmp.79 = 12.5;
+        %tmp.80 = sub %tmp.78 %tmp.79;
+        %tmp.82 = lgetv %y.2;
+        %tmp.83 = lgetv %tableDimensions;
+        %tmp.84 = getv %tmp.83 :cellHeight;
+        %tmp.85 = 2;
+        %tmp.86 = div %tmp.84 %tmp.85;
+        %tmp.87 = add %tmp.82 %tmp.86;
+        %tmp.88 = 5;
+        invoke %tmp.75 %tmp.76(%tmp.80, %tmp.87, %tmp.88);
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_169_7_172_7_stop:
+        goto @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_168_7_172_7_if_end;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_168_7_172_7_if_end:
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_154_4_174_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 176; ]
+    function drawPointsCell(dc, tableDimensions, rowNumber, color, textInCell, textColor) {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_177_4_189_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 178 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_177_4_189_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_177_4_189_4_stop" ]
+        %x.1 = local;
+        %tmp.1 = 170;
+        lputv %x.1 %tmp.1;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 179 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_177_4_189_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_177_4_189_4_stop" ]
+        %y.2 = local;
+        %tmp.2 = lgetv %tableDimensions;
+        %tmp.3 = getv %tmp.2 :y;
+        %tmp.5 = lgetv %rowNumber;
+        %tmp.6 = lgetv %tableDimensions;
+        %tmp.7 = getv %tmp.6 :cellHeight;
+        %tmp.8 = mul %tmp.5 %tmp.7;
+        %tmp.9 = add %tmp.3 %tmp.8;
+        lputv %y.2 %tmp.9;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 180 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_177_4_189_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_177_4_189_4_stop" ]
+        %cellWidth.3 = local;
+        %tmp.10 = lgetv %tableDimensions;
+        %tmp.11 = getv %tmp.10 :cellWidth;
+        %tmp.12 = 20;
+        %tmp.13 = add %tmp.11 %tmp.12;
+        lputv %cellWidth.3 %tmp.13;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 181 8 ]
+        %tmp.14 = lgetv %dc;
+        %tmp.15 = getv function %tmp.14 :setColor;
+        %tmp.17 = lgetv %color;
+        %tmp.19 = lgetv %color;
+        invoke %tmp.14 %tmp.15(%tmp.17, %tmp.19);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 182 8 ]
+        %tmp.20 = lgetv %dc;
+        %tmp.21 = getv function %tmp.20 :fillRectangle;
+        %tmp.23 = lgetv %x.1;
+        %tmp.25 = lgetv %y.2;
+        %tmp.27 = lgetv %cellWidth.3;
+        %tmp.28 = lgetv %tableDimensions;
+        %tmp.29 = getv %tmp.28 :cellHeight;
+        invoke %tmp.20 %tmp.21(%tmp.23, %tmp.25, %tmp.27, %tmp.29);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 185 8 ]
+        %tmp.30 = lgetv %dc;
+        %tmp.31 = getv function %tmp.30 :setColor;
+        %tmp.33 = lgetv %textColor;
+        %tmp.34 = getm $.Toybox.Graphics;
+        %tmp.35 = getv %tmp.34 :COLOR_TRANSPARENT;
+        invoke %tmp.30 %tmp.31(%tmp.33, %tmp.35);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 186 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_177_4_189_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_177_4_189_4_stop" ]
+        %fontHeight.4 = local;
+        %tmp.36 = lgetv %dc;
+        %tmp.37 = getv function %tmp.36 :getFontHeight;
+        %tmp.38 = getm $.Toybox.Graphics;
+        %tmp.39 = getv %tmp.38 :FONT_LARGE;
+        %tmp.40 = invoke %tmp.36 %tmp.37(%tmp.39);
+        lputv %fontHeight.4 %tmp.40;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 187 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_177_4_189_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_177_4_189_4_stop" ]
+        %textY.5 = local;
+        %tmp.42 = lgetv %y.2;
+        %tmp.43 = lgetv %tableDimensions;
+        %tmp.44 = getv %tmp.43 :cellHeight;
+        %tmp.45 = 2;
+        %tmp.46 = div %tmp.44 %tmp.45;
+        %tmp.47 = add %tmp.42 %tmp.46;
+        %tmp.49 = lgetv %fontHeight.4;
+        %tmp.50 = 2;
+        %tmp.51 = div %tmp.49 %tmp.50;
+        %tmp.52 = sub %tmp.47 %tmp.51;
+        lputv %textY.5 %tmp.52;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 188 8 ]
+        %tmp.53 = lgetv %dc;
+        %tmp.54 = getv function %tmp.53 :drawText;
+        %tmp.56 = lgetv %x.1;
+        %tmp.58 = lgetv %cellWidth.3;
+        %tmp.59 = 2;
+        %tmp.60 = div %tmp.58 %tmp.59;
+        %tmp.61 = add %tmp.56 %tmp.60;
+        %tmp.63 = lgetv %textY.5;
+        %tmp.64 = getm $.Toybox.Graphics;
+        %tmp.65 = getv %tmp.64 :FONT_LARGE;
+        %tmp.67 = lgetv %textInCell;
+        %tmp.68 = getm $.Toybox.Graphics;
+        %tmp.69 = getv %tmp.68 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.53 %tmp.54(%tmp.61, %tmp.63, %tmp.65, %tmp.67, %tmp.69);
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_177_4_189_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 192; ]
+    function drawCellOfTable(dc, tableDimensions, columnNumber, rowNumber, color, textInCell, textColor) {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_192_105_204_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 194 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_192_105_204_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_192_105_204_4_stop" ]
+        %x.1 = local;
+        %tmp.1 = lgetv %tableDimensions;
+        %tmp.2 = getv %tmp.1 :x;
+        %tmp.4 = lgetv %columnNumber;
+        %tmp.5 = lgetv %tableDimensions;
+        %tmp.6 = getv %tmp.5 :cellWidth;
+        %tmp.7 = mul %tmp.4 %tmp.6;
+        %tmp.8 = add %tmp.2 %tmp.7;
+        lputv %x.1 %tmp.8;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 195 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_192_105_204_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_192_105_204_4_stop" ]
+        %y.2 = local;
+        %tmp.9 = lgetv %tableDimensions;
+        %tmp.10 = getv %tmp.9 :y;
+        %tmp.12 = lgetv %rowNumber;
+        %tmp.13 = lgetv %tableDimensions;
+        %tmp.14 = getv %tmp.13 :cellHeight;
+        %tmp.15 = mul %tmp.12 %tmp.14;
+        %tmp.16 = add %tmp.10 %tmp.15;
+        lputv %y.2 %tmp.16;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 196 7 ]
+        %tmp.17 = lgetv %dc;
+        %tmp.18 = getv function %tmp.17 :setColor;
+        %tmp.20 = lgetv %color;
+        %tmp.22 = lgetv %color;
+        invoke %tmp.17 %tmp.18(%tmp.20, %tmp.22);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 197 7 ]
+        %tmp.23 = lgetv %dc;
+        %tmp.24 = getv function %tmp.23 :fillRectangle;
+        %tmp.26 = lgetv %x.1;
+        %tmp.28 = lgetv %y.2;
+        %tmp.29 = lgetv %tableDimensions;
+        %tmp.30 = getv %tmp.29 :cellWidth;
+        %tmp.31 = lgetv %tableDimensions;
+        %tmp.32 = getv %tmp.31 :cellHeight;
+        invoke %tmp.23 %tmp.24(%tmp.26, %tmp.28, %tmp.30, %tmp.32);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 200 7 ]
+        %tmp.33 = lgetv %dc;
+        %tmp.34 = getv function %tmp.33 :setColor;
+        %tmp.36 = lgetv %textColor;
+        %tmp.37 = getm $.Toybox.Graphics;
+        %tmp.38 = getv %tmp.37 :COLOR_TRANSPARENT;
+        invoke %tmp.33 %tmp.34(%tmp.36, %tmp.38);
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 201 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_192_105_204_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_192_105_204_4_stop" ]
+        %fontHeight.3 = local;
+        %tmp.39 = lgetv %dc;
+        %tmp.40 = getv function %tmp.39 :getFontHeight;
+        %tmp.41 = getm $.Toybox.Graphics;
+        %tmp.42 = getv %tmp.41 :FONT_LARGE;
+        %tmp.43 = invoke %tmp.39 %tmp.40(%tmp.42);
+        lputv %fontHeight.3 %tmp.43;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 202 7 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_192_105_204_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_192_105_204_4_stop" ]
+        %textY.4 = local;
+        %tmp.45 = lgetv %y.2;
+        %tmp.46 = lgetv %tableDimensions;
+        %tmp.47 = getv %tmp.46 :cellHeight;
+        %tmp.48 = 2;
+        %tmp.49 = div %tmp.47 %tmp.48;
+        %tmp.50 = add %tmp.45 %tmp.49;
+        %tmp.52 = lgetv %fontHeight.3;
+        %tmp.53 = 2;
+        %tmp.54 = div %tmp.52 %tmp.53;
+        %tmp.55 = sub %tmp.50 %tmp.54;
+        lputv %textY.4 %tmp.55;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 203 7 ]
+        %tmp.56 = lgetv %dc;
+        %tmp.57 = getv function %tmp.56 :drawText;
+        %tmp.59 = lgetv %x.1;
+        %tmp.60 = lgetv %tableDimensions;
+        %tmp.61 = getv %tmp.60 :cellWidth;
+        %tmp.62 = 2;
+        %tmp.63 = div %tmp.61 %tmp.62;
+        %tmp.64 = add %tmp.59 %tmp.63;
+        %tmp.66 = lgetv %textY.4;
+        %tmp.67 = getm $.Toybox.Graphics;
+        %tmp.68 = getv %tmp.67 :FONT_LARGE;
+        %tmp.70 = lgetv %textInCell;
+        %tmp.71 = getm $.Toybox.Graphics;
+        %tmp.72 = getv %tmp.71 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.56 %tmp.57(%tmp.64, %tmp.66, %tmp.68, %tmp.70, %tmp.72);
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_192_105_204_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 206; ]
+    function adjustStringForAdvantageCase(pointsPlayer1, pointsPlayer2) {
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_206_71_221_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 208 8 ]
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_208_8_211_8_if_stmt:
+        %tmp.2 = lgetv %pointsPlayer1;
+        %tmp.3 = -1;
+        %tmp.4 = eq %tmp.2 %tmp.3;
+        bf %tmp.4 @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_208_8_211_8_if_end;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_208_8_211_8_if_true:
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_209_8_211_8_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 210 12 ]
+        %tmp.5 = newa 2;
+        %tmp.6 = "AD";
+        %tmp.7 = dup %tmp.5;
+        %tmp.8 = aputv %tmp.7 0 %tmp.6;
+        %tmp.9 = "";
+        %tmp.10 = dup %tmp.8;
+        %tmp.11 = aputv %tmp.10 1 %tmp.9;
+        ret %tmp.11;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_209_8_211_8_stop:
+        goto @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_208_8_211_8_if_end;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_208_8_211_8_if_end:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 214 8 ]
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_214_8_217_8_if_stmt:
+        %tmp.13 = lgetv %pointsPlayer2;
+        %tmp.14 = -1;
+        %tmp.15 = eq %tmp.13 %tmp.14;
+        bf %tmp.15 @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_214_8_217_8_if_end;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_214_8_217_8_if_true:
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_215_8_217_8_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 216 12 ]
+        %tmp.16 = newa 2;
+        %tmp.17 = "";
+        %tmp.18 = dup %tmp.16;
+        %tmp.19 = aputv %tmp.18 0 %tmp.17;
+        %tmp.20 = "AD";
+        %tmp.21 = dup %tmp.19;
+        %tmp.22 = aputv %tmp.21 1 %tmp.20;
+        ret %tmp.22;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_215_8_217_8_stop:
+        goto @C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_214_8_217_8_if_end;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_214_8_217_8_if_end:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc" 220 8 ]
+        %tmp.23 = newa 2;
+        %tmp.24 = lgetv %pointsPlayer1;
+        %tmp.25 = getv function %tmp.24 :toString;
+        %tmp.26 = invoke %tmp.24 %tmp.25();
+        %tmp.27 = dup %tmp.23;
+        %tmp.28 = aputv %tmp.27 0 %tmp.26;
+        %tmp.29 = lgetv %pointsPlayer2;
+        %tmp.30 = getv function %tmp.29 :toString;
+        %tmp.31 = invoke %tmp.29 %tmp.30();
+        %tmp.32 = dup %tmp.28;
+        %tmp.33 = aputv %tmp.32 1 %tmp.31;
+        ret %tmp.33;
+C_MARIUScode_TennisScore_source_GarminWatchAppView_mc_206_71_221_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 226; ]
+    function onHide() as Void {
+    }
+}
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppView.mc"; @line = 1; ]
+<init> {
+}

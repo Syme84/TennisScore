@@ -1,0 +1,108 @@
+[ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 1; ]
+import Toybox.Lang;
+[ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 2; ]
+using Toybox.WatchUi;
+[ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 3; ]
+using Toybox.WatchUi as :Ui;
+[ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 4; ]
+using Toybox.Graphics;
+[ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 5; ]
+using Toybox.Graphics as :Gfx;
+[ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 7; ]
+module Rez {
+    [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 7; ]
+    <init> {
+    }
+    [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 8; ]
+    module Drawables {
+        [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 8; ]
+        <init> {
+        }
+        [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 9; @position = 27; initialized = true; ]
+        var LauncherIcon as ResourceId;
+        [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 10; @position = 27; initialized = true; ]
+        var TennisBallIcon as ResourceId;
+    }
+    [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 13; ]
+    module Layouts {
+        [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 13; ]
+        <init> {
+        }
+        [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 14; ]
+        function MainLayout(dc as Graphics.Dc) as Array<WatchUi.Drawable> {
+c_MARIUScode_TennisScore_source_gen_006_B3077_00_source_Rez_mcgen_14_74_16_8_start:
+[ "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen" 15 12 ]
+            %tmp.1 = newa 0 Array<WatchUi.Drawable>;
+            ret %tmp.1;
+c_MARIUScode_TennisScore_source_gen_006_B3077_00_source_Rez_mcgen_14_74_16_8_stop:
+        }
+    }
+    [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 19; ]
+    module Menus {
+        [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 19; ]
+        <init> {
+        }
+        [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 20; ]
+        class MainMenu extends WatchUi.Menu{
+            [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 20; ]
+            <init> {
+            }
+            [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 20; ]
+            static
+            <init> {
+            }
+            [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 21; ]
+            function initialize() as Void {
+c_MARIUScode_TennisScore_source_gen_006_B3077_00_source_Rez_mcgen_21_34_25_12_start:
+[ "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen" 22 16 ]
+                %tmp.2 = getv ? :Menu;
+                %tmp.3 = getv function %tmp.2 :initialize;
+                invoke %tmp.2 %tmp.3();
+[ "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen" 23 16 ]
+                %tmp.4 = self;
+                %tmp.5 = getv function %tmp.4 :addItem;
+                %tmp.6 = getm $.Toybox.WatchUi;
+                %tmp.7 = getv function %tmp.6 :loadResource;
+                %tmp.8 = getm $;
+                %tmp.9 = getv %tmp.8 :Rez;
+                %tmp.10 = getv %tmp.9 :Strings;
+                %tmp.11 = getv %tmp.10 :menu_label_1;
+                %tmp.12 = invoke %tmp.6 %tmp.7(%tmp.11);
+                %tmp.13 = as %tmp.12 String;
+                %tmp.15 = const :item_1;
+                invoke %tmp.4 %tmp.5(%tmp.13, %tmp.15);
+[ "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen" 24 16 ]
+                %tmp.16 = self;
+                %tmp.17 = getv function %tmp.16 :addItem;
+                %tmp.18 = getm $.Toybox.WatchUi;
+                %tmp.19 = getv function %tmp.18 :loadResource;
+                %tmp.20 = getm $;
+                %tmp.21 = getv %tmp.20 :Rez;
+                %tmp.22 = getv %tmp.21 :Strings;
+                %tmp.23 = getv %tmp.22 :menu_label_2;
+                %tmp.24 = invoke %tmp.18 %tmp.19(%tmp.23);
+                %tmp.25 = as %tmp.24 String;
+                %tmp.27 = const :item_2;
+                invoke %tmp.16 %tmp.17(%tmp.25, %tmp.27);
+c_MARIUScode_TennisScore_source_gen_006_B3077_00_source_Rez_mcgen_21_34_25_12_stop:
+            }
+        }
+    }
+    [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 29; ]
+    module Strings {
+        [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 29; ]
+        <init> {
+        }
+        [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 30; @position = 27; initialized = true; ]
+        var menu_label_1 as ResourceId;
+        [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 31; @position = 27; initialized = true; ]
+        var menu_label_2 as ResourceId;
+        [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 32; @position = 27; initialized = true; ]
+        var prompt as ResourceId;
+        [ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 33; @position = 27; initialized = true; ]
+        var AppName as ResourceId;
+    }
+}
+[ @file = "c:\MARIUScode\TennisScore\source\gen\006-B3077-00\source\Rez.mcgen"; @line = 1; ]
+<init> {
+}

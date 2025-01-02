@@ -1,0 +1,79 @@
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 1; ]
+import Toybox.Application;
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 2; ]
+import Toybox.Lang;
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 3; ]
+import Toybox.WatchUi;
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 5; ]
+class GarminWatchAppApp extends Application.AppBase{
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 5; ]
+    <init> {
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 5; ]
+    static
+    <init> {
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 7; @position = 8; ]
+    var tennisMatchModel;
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 9; ]
+    function initialize() as Void {
+C_MARIUScode_TennisScore_source_GarminWatchAppApp_mc_9_26_13_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc" 10 8 ]
+        %tmp.2 = getv ? :AppBase;
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc" 12 8 ]
+        %tmp.7 = getv ? :TennisMatchModel;
+        %tmp.4 = newc %tmp.7 ();
+        putv self :tennisMatchModel %tmp.4;
+C_MARIUScode_TennisScore_source_GarminWatchAppApp_mc_9_26_13_4_stop:
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 16; ]
+    function onStart(state as Dictionary or Null) as Void {
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 22; ]
+    function onStop(state as Dictionary or Null) as Void {
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 26; ]
+    function getInitialView() as [Views] or [Views, InputDelegates] {
+C_MARIUScode_TennisScore_source_GarminWatchAppApp_mc_26_68_30_4_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc" 27 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppApp_mc_26_68_30_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppApp_mc_26_68_30_4_stop" ]
+        %view.1 = local;
+        %tmp.4 = getv ? :GarminWatchAppView;
+        %tmp.6 = getv ? :tennisMatchModel;
+        %tmp.1 = newc %tmp.4 (%tmp.6);
+        lputv %view.1 %tmp.1;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc" 28 8 ]
+        [ "C_MARIUScode_TennisScore_source_GarminWatchAppApp_mc_26_68_30_4_start" "C_MARIUScode_TennisScore_source_GarminWatchAppApp_mc_26_68_30_4_stop" ]
+        %delegate.2 = local;
+        %tmp.10 = getv ? :GarminWatchAppDelegate;
+        %tmp.12 = getv ? :tennisMatchModel;
+        %tmp.7 = newc %tmp.10 (%tmp.12);
+        lputv %delegate.2 %tmp.7;
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc" 29 8 ]
+        %tmp.13 = newa 2;
+        %tmp.15 = lgetv %view.1;
+        %tmp.16 = dup %tmp.13;
+        %tmp.17 = aputv %tmp.16 0 %tmp.15;
+        %tmp.19 = lgetv %delegate.2;
+        %tmp.20 = dup %tmp.17;
+        %tmp.21 = aputv %tmp.20 1 %tmp.19;
+        ret %tmp.21;
+C_MARIUScode_TennisScore_source_GarminWatchAppApp_mc_26_68_30_4_stop:
+    }
+}
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 34; ]
+function getApp() as GarminWatchAppApp {
+C_MARIUScode_TennisScore_source_GarminWatchAppApp_mc_34_39_36_0_start:
+[ "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc" 35 4 ]
+    %tmp.1 = getm $.Toybox.Application;
+    %tmp.2 = getv function %tmp.1 :getApp;
+    %tmp.3 = invoke %tmp.1 %tmp.2();
+    %tmp.4 = as %tmp.3 GarminWatchAppApp;
+    ret %tmp.4;
+C_MARIUScode_TennisScore_source_GarminWatchAppApp_mc_34_39_36_0_stop:
+}
+[ @file = "C:\MARIUScode\TennisScore\source\GarminWatchAppApp.mc"; @line = 1; ]
+<init> {
+}

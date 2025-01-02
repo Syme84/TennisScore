@@ -1,0 +1,38 @@
+[ @file = "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc"; @line = 1; ]
+class TableDimensionsModel{
+    [ @file = "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc"; @line = 1; ]
+    <init> {
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc"; @line = 1; ]
+    static
+    <init> {
+    }
+    [ @file = "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc"; @line = 2; @position = 8; ]
+    var x;
+    [ @file = "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc"; @line = 3; @position = 8; ]
+    var y;
+    [ @file = "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc"; @line = 4; @position = 8; ]
+    var cellWidth;
+    [ @file = "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc"; @line = 5; @position = 8; ]
+    var cellHeight;
+    [ @file = "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc"; @line = 7; ]
+    function initialize(x, y, cellWidth, cellHeight) as Void {
+C_MARIUScode_TennisScore_source_TableDimensionsModel_mc_7_52_12_4_start:
+[ "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc" 8 8 ]
+        %tmp.2 = lgetv %x;
+        putv self :x %tmp.2;
+[ "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc" 9 8 ]
+        %tmp.4 = lgetv %y;
+        putv self :y %tmp.4;
+[ "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc" 10 8 ]
+        %tmp.6 = lgetv %cellWidth;
+        putv self :cellWidth %tmp.6;
+[ "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc" 11 8 ]
+        %tmp.8 = lgetv %cellHeight;
+        putv self :cellHeight %tmp.8;
+C_MARIUScode_TennisScore_source_TableDimensionsModel_mc_7_52_12_4_stop:
+    }
+}
+[ @file = "C:\MARIUScode\TennisScore\source\TableDimensionsModel.mc"; @line = 1; ]
+<init> {
+}
