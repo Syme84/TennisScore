@@ -2,3 +2,8 @@ bin/
 .vscode/
 source/GarminWatchApp.prg
 source/GarminWatchApp.prg.debug.xml
+source/TennisScore.prg
+source/TennisScore.prg.debug.xml
+/internal-mir
+/mir
+/gen
