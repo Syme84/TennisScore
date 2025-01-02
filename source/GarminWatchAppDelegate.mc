@@ -27,8 +27,12 @@ class GarminWatchAppDelegate extends WatchUi.BehaviorDelegate {
                 tennisMatchModel.increasePointsPlayer2();
                 break;
             case KEY_ESC:
+                WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+                break;
+            case KEY_ENTER:
                 tennisMatchModel.restorePreviousScore();
                 break;
+         
         }
 
         WatchUi.requestUpdate();
