@@ -129,6 +129,25 @@ class GarminWatchAppView extends WatchUi.View {
        var player1Player2Text = adjustStringForAdvantageCase(tennisMatchModel.pointsPlayer1, tennisMatchModel.pointsPlayer2);
        drawPointsCell(dc, tableDimensionsModel, 0, white, player1Player2Text[0], customPurple);
        drawPointsCell(dc, tableDimensionsModel, 1, white, player1Player2Text[1], customPurple);
+
+       // Draws the tiebreak score if necessary
+       if (tennisMatchModel.pointsTiebreakPlayer1 > 0 || tennisMatchModel.pointsTiebreakPlayer2 > 0){
+           drawTiebreakScoreCell(dc, tableDimensionsModel, 0, white, tennisMatchModel.pointsTiebreakPlayer1, customPurple);
+           drawTiebreakScoreCell(dc, tableDimensionsModel, 1, white, tennisMatchModel.pointsTiebreakPlayer2, customPurple);
+       }
+    }
+
+    function drawTiebreakScoreCell(dc, tableDimensions, rowNumber, color, textInCell, textColor){
+
+        var x = 170 + 20;
+        var y = tableDimensions.y + rowNumber * tableDimensions.cellHeight + 10;
+        var cellWidth = tableDimensions.cellWidth+20;
+
+        // Draws the current score of the cell
+        dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
+        var fontHeight = dc.getFontHeight(Graphics.FONT_SMALL); 
+        var textY = y + (tableDimensions.cellHeight / 2) - (fontHeight / 2);
+        dc.drawText(x+(cellWidth/2), textY, Graphics.FONT_SMALL, textInCell, Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     function drawPlayerNameCell(dc, tableDimensions, rowNumber, color, textInCell, textColor, hasServ)

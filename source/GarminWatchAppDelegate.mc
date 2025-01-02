@@ -25,10 +25,8 @@ class GarminWatchAppDelegate extends WatchUi.BehaviorDelegate {
                 break;
             case KEY_DOWN:
                 tennisMatchModel.increasePointsPlayer2();
-                System.println("TEST.");
                 break;
             case KEY_ESC:
-                System.println("No previous state to restore.");
                 tennisMatchModel.restorePreviousScore();
                 break;
         }

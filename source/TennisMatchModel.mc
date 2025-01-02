@@ -150,11 +150,9 @@ class TennisMatchModel {
 
     function increasePointsTiebreakPlayer1(){
        var differencePoints = pointsTiebreakPlayer1 - pointsTiebreakPlayer2;
-       if (pointsTiebreakPlayer1 <= 5)
-       {
-           pointsTiebreakPlayer1++;
-       }
-       else if (pointsTiebreakPlayer1 >= 6 && differencePoints >= 1)
+       pointsTiebreakPlayer1++;
+       
+       if (pointsTiebreakPlayer1 > 6 && differencePoints >= 1)
        {
            pointsTiebreakPlayer1 = 0;
            pointsTiebreakPlayer2 = 0;
@@ -255,11 +253,9 @@ class TennisMatchModel {
 
     function increasePointsTiebreakPlayer2(){
        var differencePoints = pointsTiebreakPlayer2 - pointsTiebreakPlayer1;
-       if (pointsTiebreakPlayer2 <= 5)
-       {
-           pointsTiebreakPlayer2++;
-       }
-       else if (pointsTiebreakPlayer2 >= 6 && differencePoints >= 1)
+       pointsTiebreakPlayer2++;
+       
+       if (pointsTiebreakPlayer2 > 6 && differencePoints >= 1)
        {
            pointsTiebreakPlayer1 = 0;
            pointsTiebreakPlayer2 = 0;
